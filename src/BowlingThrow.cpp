@@ -1,6 +1,8 @@
 #include "BowlingThrow.h"
 
 #include <ctype.h>
+#include "ImpossibleSpareException.h"
+#include "InvalidPinsCharException.h"
 
 BowlingThrow::BowlingThrow(char pinsChar, int currentFrame) :
 	pinsChar(pinsChar),
@@ -37,13 +39,13 @@ int BowlingThrow::getNumberOfPins()
 		return pinsChar - '0';
 }
 
-void BowlingThrow::alterPinsCharIfNotValid()
+void BowlingThrow::checkIfPinsCharIsValid()
 {
 	if (pinsChar == '/' && (!previousThrow || (previousThrow && previousThrow->getFrame() != frame)))
-		pinsChar = 'x';
+		throw ImpossibleSpareException();
 
 	if (!isdigit(pinsChar) && pinsChar != '-' && pinsChar != 'X' && pinsChar != 'x' && pinsChar != '/')
-		pinsChar = '-';
+		throw InvalidPinsCharException();
 }
 
 int BowlingThrow::getScore()

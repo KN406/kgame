@@ -28,7 +28,7 @@ void BowlingGame::setSequence(const string sequence) {
 			bowlingThrows[i]->setPrev(bowlingThrows[i - 1]);
 		}
 
-		bowlingThrows[i]->alterPinsCharIfNotValid();
+		bowlingThrows[i]->checkIfPinsCharIsValid();
 
 		if (bowlingThrows[i]->isStrike()) 
 			frameEnd = true;

@@ -15,7 +15,7 @@ public:
 	void setNext(BowlingThrow *next);
 	void setPrev(BowlingThrow *prev);
 
-	void alterPinsCharIfNotValid();
+	void checkIfPinsCharIsValid();
 
 	bool isStrike() { return (pinsChar == 'x' || pinsChar == 'X'); }
 	bool isSpare() { return pinsChar == '/'; }

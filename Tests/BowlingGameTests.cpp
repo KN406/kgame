@@ -2,6 +2,9 @@
 #include <gmock\gmock.h>
 #include "BowlingGame.h"
 
+#include "ImpossibleSpareException.h"
+#include "InvalidPinsCharException.h"
+
 using namespace testing;
 using namespace std;
 
@@ -94,4 +97,32 @@ TEST_F(TestFixture, DidNotStartYet) {
 	game->setSequence("");
 
 	ASSERT_THAT(game->getScore(), Eq(0));
+}
+
+TEST_F(TestFixture, ImpossibleSpareExceptionTest) {
+
+	try {
+		game->setSequence("/");
+		FAIL() << "Expected Impossible Spare Exception.";
+	}
+	catch (ImpossibleSpareException &e) {
+		ASSERT_THAT(e.what(), Eq(string("There is an impossible spare in your scorecard")));
+	}
+	catch (exception &e) {
+		FAIL() << "Expected Impossible Spare Exception.";
+	}
+}
+
+TEST_F(TestFixture, InvalidPinsCharExceptionTest) {
+
+	try {
+		game->setSequence("a");
+		FAIL() << "Expected Invalid Pins Char Exception.";
+	}
+	catch (InvalidPinsCharException &e) {
+		ASSERT_THAT(e.what(), Eq(string("There is an invalid character in your scorecard")));
+	}
+	catch (exception &e) {
+		FAIL() << "Expected Invalid Pins Char Exception.";
+	}
 }

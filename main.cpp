@@ -17,27 +17,34 @@ int main(int argc, char* argv[]) {
 	string sequence = "";
 	BowlingGame *game;
 
-	while (sequence != "q") {
+	try {
+		while (sequence != "q") {
 
-		system("cls");
+			system("cls");
 
-		cout << endl << "BOWLING GAME KATA" << endl << endl;
-		cout << ">> Enter throws sequence: (example: '-/X123456789', 'q' to quit)" << endl << endl;
+			cout << endl << "BOWLING GAME KATA" << endl << endl;
+			cout << ">> Enter throws sequence: (example: '-/X123456789', 'q' to quit)" << endl << endl;
 
-		cin >> sequence;
+			cin >> sequence;
 
-		if (sequence != "q") {
+			if (sequence != "q") {
 
-			game = new BowlingGame();
-			game->setSequence(sequence);
+				game = new BowlingGame();
+				game->setSequence(sequence);
 
-			cout << endl << ">> Your score is " << game->getScore() << endl << endl;
+				cout << endl << ">> Your score is " << game->getScore() << endl << endl;
 
-			delete game;
+				delete game;
+			}
+			else
+				cout << endl << ">> Goodbye" << endl << endl;
+
+			system("pause");
 		}
-		else
-			cout << endl << ">> Goodbye" << endl << endl;
-
+	}
+	catch (exception &e)
+	{
+		cout << endl << e.what() << endl << endl;
 		system("pause");
 	}
 	
